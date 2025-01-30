@@ -1,0 +1,59 @@
+################################  UNCLASSIFIED  ################################
+#####                                                                      #####
+#####  Author: Will Howe, NRL                                              #####
+#####  Title: Rust with systemd Example Project                            #####
+#####                                                                      #####
+################################  UNCLASSIFIED  ################################
+
+- This project contains a simple Rust program that creates a file in /tmp/ and
+  appends a message to the file every minute so you can tell that the program
+  is still working.
+
+- This project can be built with `cargo build --release`.
+
+- This project contains a systemd service file called "touch-tmp.service" which
+  can be copied to /etc/systemd/system/ to be used by systemd.
+
+- To enable the service run:
+
+> sudo systemctl daemon-reload
+> sudo systemctl enable touch-tmp.service
+> sudo systemctl start touch-tmp.service
+
+
+- To check that the new service is running, run:
+
+> sudo systemctl status touch-tmp.service
+
+- You can also run:
+
+> journalctl -u touch-tmp.service
+
+  to see that the program is printing to standard out. You should also be able
+  to inspect the contents of your file "hello.txt" in /tmp/ to see that the
+  program is working.
+
+- As proof that my systemd service file is working, I killed WSL by running
+ 
+> wsl --shutdown
+  
+  in Powershell. I then restarted Ubuntu and checked on the status of my service:
+
+whowe1@DESKTOP-ET9NNLC:~$ sudo systemctl status touch-tmp.service
+[sudo] password for whowe1:
+● touch-tmp.service - Rust Timer to Append Message Every Minute
+     Loaded: loaded (/etc/systemd/system/touch-tmp.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2025-01-28 11:30:19 EST; 15s ago
+   Main PID: 179 (touch_tmp)
+      Tasks: 1 (limit: 18963)
+     Memory: 916.0K ()
+     CGroup: /system.slice/touch-tmp.service
+             └─179 /home/whowe1/rust_systemd/touch_tmp/target/release/touch_tmp
+
+Jan 28 11:30:19 DESKTOP-ET9NNLC systemd[1]: Started touch-tmp.service - Rust Timer to Append Message Every Minute.
+Jan 28 11:30:19 DESKTOP-ET9NNLC touch_tmp[179]: Message appended to file at 2025-01-28T11:30:19.373685456-05:00
+
+which proves that my service started up on boot!
+
+################################  UNCLASSIFIED  ################################
+

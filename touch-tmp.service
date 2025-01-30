@@ -1,0 +1,15 @@
+[Unit]
+Description=Rust Timer to Append Message Every Minute
+After=network.target
+
+[Service]
+ExecStart=/home/whowe1/rust_systemd/touch_tmp/target/release/touch_tmp
+WorkingDirectory=/home/whowe1/rust_systemd/touch_tmp/target/release/
+Restart=always
+User=whowe1
+Group=whowe1
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
