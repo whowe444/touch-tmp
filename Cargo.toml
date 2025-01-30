@@ -1,7 +1,8 @@
 [package]
-name = "touch_tmp"
+name = "touch-tmp"
 version = "0.1.0"
 edition = "2021"
+repository = "https://github.com/whowe444/touch-tmp.git"
 
 [dependencies]
 chrono = "0.4"
