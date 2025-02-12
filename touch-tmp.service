@@ -3,7 +3,7 @@ Description=Rust Timer to Append Message Every Minute
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/touch-tmp/
+ExecStart=/usr/bin/touch-tmp
 WorkingDirectory=/usr/bin/
 Restart=always
 User=root
