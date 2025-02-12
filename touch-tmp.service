@@ -3,11 +3,11 @@ Description=Rust Timer to Append Message Every Minute
 After=network.target
 
 [Service]
-ExecStart=/home/whowe1/rust_systemd/touch_tmp/target/release/touch_tmp
-WorkingDirectory=/home/whowe1/rust_systemd/touch_tmp/target/release/
+ExecStart=/usr/bin/touch-tmp/
+WorkingDirectory=/usr/bin/
 Restart=always
-User=whowe1
-Group=whowe1
+User=root
+Group=root
 StandardOutput=journal
 StandardError=journal
 
